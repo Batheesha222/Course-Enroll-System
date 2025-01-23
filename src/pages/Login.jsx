@@ -36,7 +36,7 @@ const Login = () => {
 
         e.preventDefault();
 
-        console.log(formData);
+        // console.log(formData);
 
         const errors = loginValidator({
             studentEmail: formData.studentEmail,
@@ -51,7 +51,7 @@ const Login = () => {
                 //api request
 
                 const response = await axios.post("/StudentDetail/login", formData);
-                console.log(response)
+                // console.log(response)
 
                 const data = response.data;
                 window.localStorage.setItem("studentData",JSON.stringify(data.data));
