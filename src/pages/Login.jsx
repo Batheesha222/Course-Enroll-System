@@ -19,6 +19,8 @@ const initialFormError = {
 
 const Login = () => {
 
+    // const { setAuth } = useAuth(); // Get setAuth from AuthContext
+
     const [formData, setFormData] = useState(initialFormData);
     const [formError, setFormError] = useState(initialFormError);
     const [loading, setLoading] = useState(false);

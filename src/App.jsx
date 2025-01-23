@@ -7,24 +7,30 @@ import Course from './pages/Course'
 import MyCourses from './pages/MyCourses'
 import Profile from './pages/Profile'
 import About from './pages/About';
-import Navbar from './components/Navbar'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import PrivateLayout from './components/layout/PrivateLayout';
+import PublicLayout from './components/layout/PublicLayout';
 
 
 const App = () => {
+
+
   return (
     <>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/courses" element={<Course />} />
-        <Route path="/my-courses" element={<MyCourses />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route element={<PrivateLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/courses" element={<Course />} />
+          <Route path="/my-courses" element={<MyCourses />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/About" element={<About />} />
+        </Route>
+        <Route element={<PublicLayout />}>
+          <Route path="signup" element={<Signup />} />
+          <Route path="login" element={<Login />} />
+        </Route>
       </Routes>
       <ToastContainer />
     </>
