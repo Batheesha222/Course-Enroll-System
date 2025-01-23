@@ -1,7 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-// import { useAuth } from '../components/context/AuthContext'
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -13,15 +12,67 @@ const Navbar = () => {
   };
 
   return (
-    <nav className='bg-gray-800 p-4'>
-      <NavLink to="/" className="text-white px-3 py-2 rounded-md text-sm font-medium">Home</NavLink>
-      <NavLink to="/courses" className="text-white px-3 py-2 rounded-md text-sm font-medium">Courses</NavLink>
-      <NavLink to="/my-courses" className="text-white px-3 py-2 rounded-md text-sm font-medium">My Courses</NavLink>
-      <NavLink to="/add-courses" className="text-white px-3 py-2 rounded-md text-sm font-medium">Add Courses</NavLink>
-      <NavLink to="/profile" className="text-white px-3 py-2 rounded-md text-sm font-medium">Profile</NavLink>
-      <NavLink to="/About" className="text-white px-3 py-2 rounded-md text-sm font-medium">About</NavLink>
-      <NavLink to="/contact" className="text-white px-3 py-2 rounded-md text-sm font-medium">Contact</NavLink>
-      <NavLink to="/login" onClick={handleLogout} className="text-white px-3 py-2 rounded-md text-sm font-medium">Logout</NavLink>
+    <nav className="bg-gray-800 p-4 flex justify-between items-center">
+      <div className="flex space-x-4">
+        <NavLink
+          to="/"
+          className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors"
+          activeClassName="bg-gray-900"
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to="/courses"
+          className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors"
+          activeClassName="bg-gray-900"
+        >
+          All Courses
+        </NavLink>
+        <NavLink
+          to="/my-courses"
+          className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors"
+          activeClassName="bg-gray-900"
+        >
+          My Courses
+        </NavLink>
+        <NavLink
+          to="/add-courses"
+          className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors"
+          activeClassName="bg-gray-900"
+        >
+          Add Courses
+        </NavLink>
+        <NavLink
+          to="/about"
+          className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors"
+          activeClassName="bg-gray-900"
+        >
+          About
+        </NavLink>
+        <NavLink
+          to="/contact"
+          className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors"
+          activeClassName="bg-gray-900"
+        >
+          Contact
+        </NavLink>
+      </div>
+      <div className="flex space-x-4">
+        <NavLink
+          to="/profile"
+          className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors"
+          activeClassName="bg-gray-900"
+        >
+          Profile
+        </NavLink>
+        <NavLink
+          to="/login"
+          onClick={handleLogout}
+          className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors"
+        >
+          Logout
+        </NavLink>
+      </div>
     </nav>
   )
 }
