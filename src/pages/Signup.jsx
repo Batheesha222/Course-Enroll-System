@@ -32,7 +32,9 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    console.log(formData);//check data
+    
     const errors = signupValidator({
       studentName: formData.studentName,
       studentEmail: formData.studentEmail,
@@ -71,7 +73,7 @@ const Signup = () => {
         setFormError(initialFormError);
         const response = error.response;
         const data = response.data;
-        toast.error(data.message);
+        toast.error(data.message); //toast.error("cant signup;")
         // console.log(error.message);
       }
     }
