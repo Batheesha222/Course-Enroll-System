@@ -11,6 +11,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import PrivateLayout from './components/layout/PrivateLayout';
 import PublicLayout from './components/layout/PublicLayout';
+import AddCourses from './pages/AddCourses';
 
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/courses" element={<Course />} />
           <Route path="/my-courses" element={<MyCourses />} />
+          <Route path="/add-courses" element={<AddCourses/>} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/About" element={<About />} />

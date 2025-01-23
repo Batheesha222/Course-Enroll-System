@@ -17,6 +17,7 @@ const Navbar = () => {
       <NavLink to="/" className="text-white px-3 py-2 rounded-md text-sm font-medium">Home</NavLink>
       <NavLink to="/courses" className="text-white px-3 py-2 rounded-md text-sm font-medium">Courses</NavLink>
       <NavLink to="/my-courses" className="text-white px-3 py-2 rounded-md text-sm font-medium">My Courses</NavLink>
+      <NavLink to="/add-courses" className="text-white px-3 py-2 rounded-md text-sm font-medium">Add Courses</NavLink>
       <NavLink to="/profile" className="text-white px-3 py-2 rounded-md text-sm font-medium">Profile</NavLink>
       <NavLink to="/About" className="text-white px-3 py-2 rounded-md text-sm font-medium">About</NavLink>
       <NavLink to="/contact" className="text-white px-3 py-2 rounded-md text-sm font-medium">Contact</NavLink>
