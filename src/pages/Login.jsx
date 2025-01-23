@@ -52,7 +52,7 @@ const Login = () => {
                 console.log(response)
 
                 const data = response.data;
-                window.localStorage.setItem("studentDetails",JSON.stringify(data.data));
+                window.localStorage.setItem("studentData",JSON.stringify(data.data));
 
                 toast.success(data.message);
 
