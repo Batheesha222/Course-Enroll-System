@@ -84,13 +84,14 @@ const Signup = () => {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form className="bg-white p-8 rounded-lg shadow-md w-full max-w-md" onSubmit={handleSubmit}>
         <h2 className="text-2xl font-bold mb-6 text-center">Signup Form</h2>
+
         <div className="mb-4">
           <label className="block text-gray-700">Student Name</label>
           <input
             className="w-full px-3 py-1 border border-gray-300 rounded-md"
             type="text"
             name="studentName"
-            placeholder="Jhon Doe"
+            placeholder="John Doe"
             value={formData.studentName}
             onChange={handleChange}
           />
@@ -133,17 +134,34 @@ const Signup = () => {
             value={formData.phoneNumber}
             onChange={handleChange}
           />
-          {formError.phoneNumber && (
-            <p className="text-red-500 text-sm">{formError.phoneNumber}</p>
-          )}
+          {formError.phoneNumber && <p className="text-red-500 text-sm">{formError.phoneNumber}</p>}
         </div>
 
-        <div className="mb-4 flex justify-center">
+        <div className="mb-6 flex flex-col gap-4">
           <input
-            className="w-[70%]  bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200"
+            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200"
             type="submit"
-            value={`${loading ? "saving..." : "signup"}`}
+            value={`${loading ? 'Saving...' : 'Signup'}`}
           />
+
+          <button
+            type="button"
+            className="w-full bg-gray-300 text-gray-800 py-2 rounded-md hover:bg-gray-400 transition duration-200"
+            onClick={() => navigate(-1)} // Navigate back
+          >
+            Back
+          </button>
+        </div>
+
+        <div className="text-center">
+          <span className="text-gray-700">Already have an account? </span>
+          <button
+            type="button"
+            className="text-blue-500 hover:underline"
+            onClick={() => navigate('/login')}
+          >
+            Login
+          </button>
         </div>
       </form>
     </div>

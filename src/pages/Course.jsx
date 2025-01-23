@@ -1,88 +1,106 @@
-import React from 'react'
-import { useEffect } from 'react';
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import axios from '../utils/axiosInstance';
 import { useNavigate } from 'react-router-dom';
-
+import { useAuth } from '../components/context/AuthContext';
+import { toast } from 'react-toastify';
 
 const Course = () => {
-
   const [allCourses, setAllCourses] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [enrolledCourses, setEnrolledCourses] = useState([]);
 
- const navigate = useNavigate();
+  const auth = useAuth();
+  const studentId = auth.studentId; // Get the student ID from auth context
 
+  const navigate = useNavigate();
+
+  // Fetch all courses
   useEffect(() => {
     const getCourses = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`/CourseDetail`);
-        console.log('Enrolled Courses:', response.data)
-        
-        setAllCourses(response.data);
+
+        // Fetch all courses
+        const coursesResponse = await axios.get(`/CourseDetail`);
+        setAllCourses(coursesResponse.data);
+
+        // Fetch enrolled courses for the student
+        const enrolledResponse = await axios.get(`/StudentCourseDetail/${studentId}`);
+        setEnrolledCourses(enrolledResponse.data);
+
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        console.error("Error fetching courses:", error);
         setLoading(false);
       }
-    }
+    };
+
     getCourses();
-  }, []);
+  }, [studentId]);
+
+  // Handle course enrollment
+  const handleEnroll = async (courseId) => {
+    if (enrolledCourses.some((course) => course.courseId === courseId)) {
+      toast.info("You are already enrolled in this course.");
+      return;
+    }
+
+    try {
+      const payload = { studentId, courseId };
+      const response = await axios.post("/StudentCourseDetail/enroll", payload);
+
+      if (response.status === 201) {
+        toast.success("Successfully enrolled in the course.");
+        // Update enrolled courses locally
+        setEnrolledCourses((prev) => [...prev, { courseId }]);
+      }
+    } catch (error) {
+      console.error("Error enrolling in course:", error);
+      toast.error("Error enrolling in course. Please try again later.");
+    }
+  };
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-4xl font-bold text-center text-blue-600 mb-4">Welcome studentName</h1>
-      <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">all Courses</h2>
+      <h1 className="text-4xl font-bold text-center text-blue-600 mb-4">
+      All Courses
+      </h1>
       
+
       {loading ? (
-        <p>Loading...</p>
+        <p className="text-center text-gray-600">Loading...</p>
       ) : (
-        allCourses.map((course) => ( 
-          <div className="box-border p-4 bg-white shadow-md rounded-lg mb-4" key={course.courseId}>
-            <div className="flex gap-5 items-center">
-              <h3 className="text-xl font-medium text-gray-800">{course.courseName}</h3>
-              <p className="text-gray-600">{course.courseDescription}</p>
+        allCourses.map((course) => {
+          const isEnrolled = enrolledCourses.some((enrolled) => enrolled.courseId === course.courseId);
+
+          return (
+            <div
+              className="flex justify-between items-center bg-white shadow-md rounded-lg p-4 mb-4"
+              key={course.courseId}
+            >
+              <div className="flex items-center gap-4">
+                <h3 className="text-xl font-medium text-gray-800 min-w-[150px]">
+                  {course.courseName}
+                </h3>
+                <p className="text-gray-600">{course.courseDescription}</p>
+              </div>
+              <button
+                className={`py-2 px-4 rounded font-bold ${
+                  isEnrolled
+                    ? "bg-gray-400 cursor-not-allowed text-white"
+                    : "bg-green-500 hover:bg-green-700 text-white"
+                }`}
+                onClick={() => !isEnrolled && handleEnroll(course.courseId)} // Only call handleEnroll if not enrolled
+                disabled={isEnrolled} // Disable button if already enrolled
+              >
+                {isEnrolled ? "Enrolled" : "Enroll"}
+              </button>
             </div>
-          </div>
-         ))
-      )} 
-      
+          );
+        })
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Course
-
-
-
-
-// const Course = () => {
-
-  
-
- 
-
-
-//   return (
-//     <div className="p-6 bg-gray-100 min-h-screen">
-//       <h1 className="text-4xl font-bold text-center text-blue-600 mb-4">Welcome {studentName}</h1>
-//       <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">My Enrolled Courses</h2>
-
-//       {/* {loading ? (
-//         <p>Loading...</p>
-//       ) : (
-//         allCourses.map((course) => ( */}
-//           <div className="box-border p-4 bg-white shadow-md rounded-lg mb-4">
-//             <div className="flex gap-5 items-center" key={course.courseId}>
-//               <h3 className="text-xl font-medium text-gray-800">course.courseName</h3>
-//               <p className="text-gray-600">course.courseDescription</p>
-//             </div>
-//           </div>
-//         {/* ))
-//       )} */}
-
-//     </div>
-//   )
-// }
-
-// export default Course
+export default Course;

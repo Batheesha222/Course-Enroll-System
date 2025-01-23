@@ -3,6 +3,7 @@ import { useAuth } from '../components/context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from '../utils/axiosInstance';
 import { useState } from 'react';
+import children from '../assets/images/children.png';
 
 const Home = () => {
 
@@ -40,22 +41,34 @@ const Home = () => {
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-4xl font-bold text-center text-blue-600 mb-4">Welcome {studentName}</h1>
-      <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">My Enrolled Courses</h2>
+      <h2 className="text-4xl font-bold text-center text-blue-600 mb-4">Welcome, {studentName}...!</h2>
+      <div className="flex justify-center mb-6">
+        <img
+          src={children}
+          alt="Children illustration"
+          className="w-2/3 md:w-1/3 rounded-lg  object-cover"
+        />
+      </div>
+      
 
       {loading ? (
-        <p>Loading...</p>
+        <p className="text-center text-gray-600">Loading...</p>
       ) : (
         enrolledCourses.map((course) => (
-          <div className="box-border p-4 bg-white shadow-md rounded-lg mb-4" key={course.courseId}>
-            <div className="flex gap-5 items-center" >
-              <h3 className="text-xl font-medium text-gray-800">{course.courseName}</h3>
-              <p className="text-gray-600">{course.courseDescription}</p>
+          <div
+            className="p-4 bg-white shadow-md rounded-lg mb-4 flex justify-between items-start"
+            key={course.courseId}
+          >
+            <div className="flex flex-col md:flex-row md:items-start md:gap-6 w-full">
+              <h3 className="text-xl font-medium text-gray-800 min-w-[150px]">{course.courseName}</h3>
+              <p className="text-gray-600 text-sm md:text-base flex-1">{course.courseDescription}</p>
             </div>
+            <button className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+              Start
+            </button>
           </div>
         ))
       )}
-
     </div>
   )
 }
