@@ -22,7 +22,7 @@ const Home = () => {
         setLoading(true);
         const response = await axios.get(`/StudentCourseDetail/${studentId}`);
         console.log('Enrolled Courses:', response.data)
-        console.log(studentId)
+
         setEnrolledCourses(response.data);
         setLoading(false);
       } catch (error) {
@@ -47,8 +47,8 @@ const Home = () => {
         <p>Loading...</p>
       ) : (
         enrolledCourses.map((course) => (
-          <div className="box-border p-4 bg-white shadow-md rounded-lg mb-4">
-            <div className="flex gap-5 items-center" key={course.courseId}>
+          <div className="box-border p-4 bg-white shadow-md rounded-lg mb-4" key={course.courseId}>
+            <div className="flex gap-5 items-center" >
               <h3 className="text-xl font-medium text-gray-800">{course.courseName}</h3>
               <p className="text-gray-600">{course.courseDescription}</p>
             </div>
