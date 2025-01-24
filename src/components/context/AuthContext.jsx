@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
       setAuth(null);
     }
   }, [navigate, location]);
+  
   // Sync auth state with localStorage whenever auth changes
   useEffect(() => {
     if (auth) {

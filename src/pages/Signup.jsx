@@ -60,7 +60,7 @@ const Signup = () => {
           phoneNumber: formData.phoneNumber,
         };
         const response = await axios.post("/StudentDetail/signup", requestBody);
-        console.log(response)
+        // console.log(response)
         const data = response.data;
         toast.success(data.message);
 

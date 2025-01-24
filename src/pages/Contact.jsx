@@ -1,6 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Contact = () => {
+
+  const navigate = useNavigate();
+
   return (
     <div className="container mx-auto p-6">
       <div className="bg-white shadow-md rounded-lg p-6 max-w-lg mx-auto">
@@ -48,6 +52,7 @@ const Contact = () => {
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
+            onClick={() => navigate("/login")}
           >
             Send Message
           </button>

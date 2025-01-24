@@ -51,7 +51,7 @@ const Course = () => {
 
       if (response.status === 201) {
         toast.success("Successfully enrolled in the course.");
-        // Update enrolled courses locally
+        // Update enrolled courses
         setEnrolledCourses((prev) => [...prev, { courseId }]);
       }
     } catch (error) {
@@ -90,8 +90,8 @@ const Course = () => {
                     ? "bg-gray-400 cursor-not-allowed text-white"
                     : "bg-green-500 hover:bg-green-700 text-white"
                 }`}
-                onClick={() => !isEnrolled && handleEnroll(course.courseId)} // Only call handleEnroll if not enrolled
-                disabled={isEnrolled} // Disable button if already enrolled
+                onClick={() => !isEnrolled && handleEnroll(course.courseId)} 
+                disabled={isEnrolled} // Disable button 
               >
                 {isEnrolled ? "Enrolled" : "Enroll"}
               </button>
